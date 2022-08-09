@@ -1,11 +1,13 @@
 from flask import Flask, render_template
+from logging import debug
+from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:12345678@localhost:5432/task_detailer'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:banco123@localhost:5432/task_detailer'
 
-app.config['SECRET_KEY'] = '\xff\x98Tq\x80\xf3\xb6\xac=\x10\xbfG\x9a\x98\x1e\xab098fi\xed\x1d@'
+app.config['SECRET_KEY'] = '15(E\xab\x85m\xf3\x8f\xe4q`\x13>\xf9\x14j\xcc\x866}\xbc\r\x03'
 
 db = SQLAlchemy(app)
 
@@ -19,7 +21,7 @@ class Topic(db.Model):
 
 @app.route('/')
 def display_topics():
-    return render_template('home.html')
+    return render_template('home.html', topics=Topic.query.all())
 
 
 @app.route('/topic/<topic_id>')
