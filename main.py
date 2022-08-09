@@ -3,6 +3,20 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:12345678@localhost:5432/task_detailer'
+
+app.config['SECRET_KEY'] = '\xff\x98Tq\x80\xf3\xb6\xac=\x10\xbfG\x9a\x98\x1e\xab098fi\xed\x1d@'
+
+db = SQLAlchemy(app)
+
+
+class Topic(db.Model):
+    __tablename__ = 'topics'
+
+    topic_id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(length=255))
+
+
 @app.route('/')
 def display_topics():
     return render_template('home.html')
