@@ -41,12 +41,30 @@ def display_tasks(topic_id):
 
 @app.route('/add/topic', methods=["POST"])
 def add_topic():
-    return "Topic Added Successfully" # add topic functionality
+    if not request.form["topic-title"]:
+        flash("Enter a title for your new topic", "tomato")
+
+    else:
+        topic = Topic(title=request.form['topic-title'])
+        db.session.add(topic)
+        db.session.commit()
+        flash("Topic Added Successfully", "green")
+
+    return redirect(url_for('display_topics'))
 
 
 @app.route("/add/task/<topic_id>", methods=["POST"])
 def add_task(topic_id):
-    return "Task Added Successfully"  # add task functionality
+    if not request.form["task-description"]:
+        flash("Enter a description for your new task", "tomato")
+
+    else:
+        task = Task(description=request.form["task-description"], topic_id=topic_id)
+        db.session.add(task)
+        db.session.commit()
+        flash("Task Added Successfully", "green")
+
+    return redirect(url_for('display_tasks', topic_id=topic_id))
 
      
 if __name__ == "__main__":
