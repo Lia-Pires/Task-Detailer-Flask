@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, flash, redirect, url_for
+
 from logging import debug
 from flask_sqlalchemy import SQLAlchemy
 
@@ -19,6 +20,16 @@ class Topic(db.Model):
     title = db.Column(db.String(length=255))
 
 
+class Task(db.Model):
+    __tablename__ = 'tasks'
+
+    task_id = db.Column(db.Integer, primary_key=True)
+    topic_id = db.Column(db.Integer, db.ForeignKey('topics.topic_id'))
+    description = db.Column(db.String(length=255))
+
+    topic = db.relationship("Topic")
+
+
 @app.route('/')
 def display_topics():
     return render_template('home.html', topics=Topic.query.all())
@@ -26,7 +37,7 @@ def display_topics():
 
 @app.route('/topic/<topic_id>')
 def display_tasks(topic_id):
-    return render_template("topic-tasks.html", topic_id=topic_id)
+    return render_template("topic-tasks.html", topic=Topic.query.filter_by(topic_id=topic_id).first(), tasks=Task.query.filter_by(topic_id=topic_id).all())
 
 @app.route('/add/topic', methods=["POST"])
 def add_topic():
