@@ -19,6 +19,8 @@ class Topic(db.Model):
     topic_id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(length=255))
 
+    task = db.relationship("Task", cascade='all, delete-orphan')
+
 
 class Task(db.Model):
     __tablename__ = 'tasks'
@@ -27,7 +29,7 @@ class Task(db.Model):
     topic_id = db.Column(db.Integer, db.ForeignKey('topics.topic_id'))
     description = db.Column(db.String(length=255))
 
-    topic = db.relationship("Topic")
+    topic = db.relationship("Topic", backref='topic')
 
 
 @app.route('/')
@@ -62,9 +64,28 @@ def add_task(topic_id):
         task = Task(description=request.form["task-description"], topic_id=topic_id)
         db.session.add(task)
         db.session.commit()
-        flash("Task Added Successfully", "green")
+        flash("Task item added successfully", "green")
 
     return redirect(url_for('display_tasks', topic_id=topic_id))
+
+
+@app.route('/delete/task/<task_id>', methods=["POST"])  #deleting individual items
+def delete_task(task_id):
+    pending_delete_task = Task.query.filter_by(task_id=task_id).first()
+    target_topic_id = pending_delete_task.topic.topic_id
+    db.session.delete(pending_delete_task)
+    db.session.commit()
+
+    return redirect(url_for('display_tasks', topic_id=target_topic_id))
+
+
+@app.route('/delete/topic/<topic_id>', methods=["POST"])
+def delete_topic(topic_id):
+    pending_delete_topic = Topic.query.filter_by(topic_id=topic_id).first()
+    db.session.delete(pending_delete_topic)
+    db.session.commit()
+
+    return redirect(url_for("display_topics"))
 
      
 if __name__ == "__main__":

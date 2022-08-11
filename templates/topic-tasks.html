@@ -11,6 +11,9 @@
     <ul>
         {% for task in tasks %}
         <li>{{ task.description }}</li>
+        <form action="/delete/task/{{ task.task_id }}" method="POST">
+            <input type="submit" value="Delete Item">
+        </form>
         {% endfor %}
     </ul>
 </body>
@@ -22,8 +25,14 @@
             <input type="text" name="task-description">
         </div>
 
-        <input type="submit" value="Add Task">
+        <input type="submit" value="Add Item">
     </form>
+
+    <div class="delete-topic">
+        <form action="/delete/topic/{{topic.topic_id}}" method="POST">
+            <input type="submit" value="Delete Task">
+        </form>
+    </div>
 
     <div class="message">
         {% for category, message in get_flashed_messages(with_categories=true) %}
