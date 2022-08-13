@@ -64,7 +64,7 @@ def add_task(topic_id):
         task = Task(description=request.form["task-description"], topic_id=topic_id)
         db.session.add(task)
         db.session.commit()
-        flash("Task item added successfully", "green")
+        flash("Item Added Successfully", "green")
 
     return redirect(url_for('display_tasks', topic_id=topic_id))
 

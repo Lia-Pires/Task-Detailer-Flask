@@ -6,10 +6,9 @@
 
 
   h3 {
-    color: rgb(105,106,111);
+    color: rgb(125,123,122);
     font-size: 40px; 
-    -webkit-text-stroke-width: 0.3px;
-    -webkit-text-stroke-color: rgb(38,36,37);
+   
  }
 
   body {
@@ -20,7 +19,7 @@
     background-position: center;
     background-repeat: no-repeat;
   
-    color: rgb(105,106,111);
+    color: rgb(125,123,122);
   
     display: flex;
     flex-direction: column;
@@ -30,7 +29,7 @@
   .page {
     height: 100%;
     width: 1100px;
-    background-color: rgb(159,101,71);
+    background-color: rgb(218,176,118, 0.5);
     padding: 50px;
   }
   
@@ -39,9 +38,8 @@
     font-size: 60px;
     font-weight: 100;
     margin-bottom: 30px;
-    color: rgb(38,36,37);
-    -webkit-text-stroke-width: 0.3px;
-    -webkit-text-stroke-color: rgb(208,204,203);
+    color: rgb(54,51,51);
+
   }
   
   .content {
@@ -81,8 +79,8 @@
   }
   
   .tasks ul div form input {
-    color: rgb(159,101,71);
-    border: 1px solid rgb(159,101,71);
+    color: rgb(213,146,54);
+    border: 1px solid rgb(213,146,54);
     background: none;
     padding: 8px 16px;
     cursor: pointer;
@@ -101,8 +99,8 @@
     background: none;
     border: none;
     outline: none;
-    border-left: 1px solid rgb(105,106,111);
-    border-bottom: 1px solid rgb(105,106,111);
+    border-left: 1px solid rgb(125,123,122);
+    border-bottom: 1px solid rgb(125,123,122);
     color: rgb(38,36,37);
   }
   
@@ -111,7 +109,7 @@
   }
   
   ::placeholder {
-        color:rgb(38,36,37, 0.501);
+        color:rgbrgb(125,123,122, 0.5);
   }
   
   input[type="submit"] {
@@ -120,8 +118,8 @@
     border: none;
     outline: none;
     font-size: 20px;
-    color: rgb(105,106,111);
-    border: 1px solid rgb(105,106,111);
+    color: rgb(213,146,54);
+    border: 1px solid rgb(213,146,54);
     cursor: pointer;
   }
   
